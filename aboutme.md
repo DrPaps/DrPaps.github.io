@@ -1,16 +1,10 @@
 ---
 layout: page
 title: About me
-subtitle: Why you'd want to go on a date with me
 ---
 
-My name is Inigo Montoya. I have the following qualities:
+My name is Pavan Pavithran. I'm a cybersecurity enthusiast with a background in Engineering Physics from University of Illinois at Urbana-Champaign, currently invested deeply into all things cybersecurity.
 
-- I rock a great mustache
-- I'm extremely loyal to my family
+This website serves as a portfolio and a learning journal, where I share my CTF writeups, vulnerability assessments, and technical insights. It is meant to reflect my growth and commitment to my learning in this field.
 
-What else do you need?
-
-### My story
-
-To be honest, I'm having some trouble remembering right now, so why don't you just watch [my movie](https://en.wikipedia.org/wiki/The_Princess_Bride_%28film%29) and it will answer **all** your questions.
+I’m open to opportunities across the cybersecurity field to broaden my horizons and am eager to contribute, collaborate, and grow within the community. Feel free to explore my work and get in touch.
