@@ -1,0 +1,64 @@
+---
+layout: default
+title: Writeups
+permalink: /writeups.html
+---
+
+
+<div class="text-center">
+  <h1>CTF Writeups</h1>
+  <h2 class="small">Rendered directly from my GitHub Writeups repo</h2>
+  <br/>
+
+  <div id="writeup-links"></div>
+  <div id="writeup-content" style="text-align: left; max-width: 800px; margin: 2rem auto;"></div>
+</div>
+
+<!-- Use a CDN markdown parser -->
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+<script>
+  const username = "DrPaps"; 
+  const repo = "Writeups-and-Reports";  
+  const branch = "main"; 
+  const folderPath = "TryHackMe";
+
+  const linksDiv = document.getElementById("writeup-links");
+  const contentDiv = document.getElementById("writeup-content");
+
+  const apiUrl = `https://api.github.com/repos/${username}/${repo}/contents/${folderPath}?ref=${branch}`;
+
+
+  fetch(apiUrl)
+    .then(response => response.json())
+    .then(data => {
+      linksDiv.innerHTML = "<ul style='list-style: none; padding: 0;'>";
+      data.forEach(file => {
+        if (file.name.endsWith(".md")) {
+          const fileName = file.name.replace(".md", "");
+          const button = document.createElement("button");
+          button.textContent = fileName;
+          button.style.margin = "5px";
+          button.onclick = () => loadWriteup(file.download_url, fileName);
+          linksDiv.appendChild(button);
+        }
+      });
+      linksDiv.innerHTML += "</ul>";
+    })
+    .catch(err => {
+      linksDiv.innerHTML = "<p>Failed to load writeups.</p>";
+      console.error(err);
+    });
+
+  function loadWriteup(url, title) {
+    fetch(url)
+      .then(res => res.text())
+      .then(md => {
+        contentDiv.innerHTML = `<h2>${title}</h2><hr/>` + marked.parse(md);
+      })
+      .catch(err => {
+        contentDiv.innerHTML = "<p>Failed to load writeup content.</p>";
+        console.error(err);
+      });
+  }
+</script>
