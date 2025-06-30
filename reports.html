@@ -1,0 +1,51 @@
+---
+layout: default
+title: Reports
+permalink: /reports.html
+---
+
+<div class="text-center">
+  <h1>Security Reports</h1>
+  <h2 class="small">PDFs pulled from my GitHub reports repository</h2>
+  <br/>
+
+  <ul id="report-list" style="list-style: none; padding: 0; font-size: 18px;"></ul>
+</div>
+
+<script>
+  const username = "DrPaps";
+  const repo = "Writeups-and-Reports";
+  const branch = "main";
+  const folder = ""; // Root of repo
+
+  const apiUrl = `https://api.github.com/repos/${username}/${repo}/contents/${folder}?ref=${branch}`;
+  const listElement = document.getElementById("report-list");
+
+  fetch(apiUrl)
+    .then(response => response.json())
+    .then(files => {
+      listElement.innerHTML = "";
+      files.forEach(file => {
+        if (file.name.endsWith(".pdf")) {
+          const li = document.createElement("li");
+          li.style.margin = "10px 0";
+
+          const link = document.createElement("a");
+          link.href = `https://raw.githubusercontent.com/${username}/${repo}/${branch}/${file.name}`;
+          link.target = "_blank";
+          link.textContent = file.name.replace(/[-_]/g, " ").replace(".pdf", "");
+
+          li.appendChild(link);
+          listElement.appendChild(li);
+        }
+      });
+
+      if (!files.some(f => f.name.endsWith(".pdf"))) {
+        listElement.innerHTML = "<li>No PDF reports found.</li>";
+      }
+    })
+    .catch(error => {
+      listElement.innerHTML = "<li>Failed to load reports.</li>";
+      console.error("Error fetching reports:", error);
+    });
+</script>
