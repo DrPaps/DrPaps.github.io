@@ -22,7 +22,7 @@ author: Pavan Pavithran
 navbar-links:
   About Me: "aboutme"
   Writeups: "writeups.html"
-  Reports: "reports"
+  Reports: "reports.html"
   Resume: "resume.html"
 ################
 # --- Logo --- #
