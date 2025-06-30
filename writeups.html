@@ -6,14 +6,15 @@ permalink: /writeups.html
 
 
 <div class="text-center">
-  <h1>TryHackMe CTF Writeups</h1>
+  <h1>TryHackMe Writeups</h1>
   <h2 class="small">Rendered directly from my GitHub Writeups-and-Reports repo</h2>
   <br/>
 
-  <div id="writeup-links"></div>
+  <div id="writeup-links" style="margin-bottom: 30px;"></div>
   <div id="writeup-content" style="text-align: left; max-width: 800px; margin: 2rem auto;"></div>
 </div>
 
+<!-- Markdown parser -->
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
 <script>
@@ -23,7 +24,6 @@ permalink: /writeups.html
   const rootFolder = "TryHackMe";
 
   const apiUrl = `https://api.github.com/repos/${username}/${repo}/contents/${rootFolder}?ref=${branch}`;
-
   const linksDiv = document.getElementById("writeup-links");
   const contentDiv = document.getElementById("writeup-content");
 
@@ -45,6 +45,8 @@ permalink: /writeups.html
             const button = document.createElement("button");
             button.textContent = folderName;
             button.style.margin = "5px";
+            button.style.padding = "6px 12px";
+            button.style.cursor = "pointer";
             button.onclick = () => loadWriteup(mdFile.download_url, folderName);
             linksDiv.appendChild(button);
           }
@@ -63,8 +65,17 @@ permalink: /writeups.html
   async function loadWriteup(url, title) {
     try {
       const res = await fetch(url);
-      const md = await res.text();
+      let md = await res.text();
+
+      // Fix image paths: convert relative to absolute GitHub raw URLs
+      const basePath = url.substring(0, url.lastIndexOf("/") + 1);
+      md = md.replace(/!\[(.*?)\]\((?!https?:\/\/)(.*?)\)/g, (match, alt, imgPath) => {
+        return `![${alt}](${basePath}${imgPath})`;
+      });
+
       contentDiv.innerHTML = `<h2>${title}</h2><hr/>` + marked.parse(md);
+      window.scrollTo({ top: contentDiv.offsetTop - 30, behavior: "smooth" });
+
     } catch (err) {
       contentDiv.innerHTML = "<p>Failed to load writeup content.</p>";
       console.error(err);
