@@ -1,0 +1,76 @@
+---
+layout: default
+title: CTF-WebApp-StarterKit
+permalink: /web-reconenum-tool.html
+---
+
+<div class="text-center">
+  <h1>CTF-WebApp-Starterkit</h1>
+  <h2 class="small">Automated web security reconnaissance and CTF enumeration utility</h2>
+  <br/>
+</div>
+
+<div style="max-width: 950px; margin: 0 auto; font-size: 18px; line-height: 1.7;">
+
+  <p>
+    An object-oriented Python command-line utility engineered for automated web security
+    reconnaissance and CTF (Capture The Flag) enumeration. This tool automates infrastructure
+    banner grabbing, cross-references findings with local vulnerability databases, identifies
+    hidden architectural files, and conducts fast, multi-threaded directory fuzzing equipped
+    with dynamic wildcard calibration.
+  </p>
+
+  <h2>Features</h2>
+  <ul>
+    <li>
+      <strong>Infrastructure Analysis:</strong> Extracts HTTP headers, target technologies,
+      and server infrastructure details.
+    </li>
+    <li>
+      <strong>Automated Searchsploit Mapping:</strong> Integrates via subprocess with local
+      searchsploit installations to immediately pull relevant CVEs and Exploit-DB scripts
+      matching server banners.
+    </li>
+    <li>
+      <strong>Hidden File Analysis:</strong> Automatically checks for <code>/robots.txt</code>
+      and <code>/sitemap.xml</code> presence and HTTP availability.
+    </li>
+    <li>
+      <strong>Directory Fuzzing:</strong> Implements multi-threaded directory discovery using
+      Python’s <code>ThreadPoolExecutor</code>.
+    </li>
+    <li>
+      <strong>False-Positive Filtering:</strong> Features an automated pre-scan calibration
+      routine to detect wildcard server redirects and dynamically filter spam status codes.
+    </li>
+  </ul>
+
+  <h2>Installation &amp; Setup</h2>
+
+  <h3>1. Clone the Repository</h3>
+  <pre style="background: #f4f4f4; padding: 16px; border-radius: 8px; overflow-x: auto;"><code>git clone git@github.com:DrPaps/CTF-WebApp-Starterkit.git
+cd CTF-WebApp-Starterkit</code></pre>
+
+  <h3>2. (Optional) Create and Activate a Virtual Environment</h3>
+  <pre style="background: #f4f4f4; padding: 16px; border-radius: 8px; overflow-x: auto;"><code>python3 -m venv .venv
+source .venv/bin/activate</code></pre>
+
+  <h3>3. Install Required Dependencies</h3>
+  <pre style="background: #f4f4f4; padding: 16px; border-radius: 8px; overflow-x: auto;"><code>pip install requests</code></pre>
+
+  <h2>Usage</h2>
+
+  <h3>Basic Scan (Infrastructure &amp; Hidden Files)</h3>
+  <pre style="background: #f4f4f4; padding: 16px; border-radius: 8px; overflow-x: auto;"><code>python3 ctf_recon.py -u https://example.com</code></pre>
+
+  <h3>Advanced Scan (Multi-Threaded Fuzzing with Custom Wordlist)</h3>
+  <pre style="background: #f4f4f4; padding: 16px; border-radius: 8px; overflow-x: auto;"><code>python3 ctf_recon.py -u https://example.com -w your_wordlist.txt -t 15</code></pre>
+
+  <h2>Repository</h2>
+  <p>
+    <a href="https://github.com/DrPaps/ctf-starter-kit" target="_blank">
+      View the GitHub repository
+    </a>
+  </p>
+
+</div>
