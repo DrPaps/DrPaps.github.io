@@ -24,6 +24,7 @@ navbar-links:
   Writeups: "writeups.html"
   Reports: "reports.html"
   Resume: "resume.html"
+  Projects: "projects.html"
 ################
 # --- Logo --- #
 ################
@@ -60,7 +61,7 @@ social-network-links:
 #  snapchat: deanat78
 #  instagram: deanat78
 #  spotify: yourname
-#  telephone: +14159998888
+#  telephone: +971527607194
 #  steam: deanat78
 #  twitch: yourname
 #  yelp: yourname
